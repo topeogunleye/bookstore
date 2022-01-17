@@ -1,49 +1,54 @@
-import React, { useState }from 'react';
+import React from 'react';
 
 function Books() {
-  const [books, setBooks] = useState([
+  const [books] = [
     {
       title: 'The Hunger Games',
       Authur: 'Suzanne Collins',
       Category: 'Action',
+      id: 1,
     },
     {
       title: 'Dune',
       Authur: 'Frank Herbert',
       Category: 'Science Fiction',
+      id: 2,
     },
     {
       title: 'Capital in the Twenty First Century',
       Authur: 'Thomas Piketty',
       Category: 'Economy',
+      id: 3,
     },
-  ]);
+  ];
 
   return (
     <div>
       <h2>Books</h2>
       <ul>
         {books.map((book) => (
-          <div className="">
+          <div className="" key={book.id}>
             <li key={book.id}>{book.title}</li>
             <li>{book.Authur}</li>
             <li>{book.completed ? 'Completed' : 'Not Completed'}</li>
-            <button>Remove</button>
+            <button type="button">Remove</button>
           </div>
         ))}
       </ul>
 
-      <form action="">
+      <form>
         <input type="text" placeholder="Title" />
         <input type="text" placeholder="Authur" />
-        <label for="Category">Category</label>
-        <select name="Category" id="Category">
-          <option value="Action">Action</option>
-          <option value="Science Fiction">Science Fiction</option>
-          <option value="Economy">Economy</option>
-        </select>
+        <label htmlFor="Category">
+          Category
+          <select name="Category" id="Category">
+            <option value="Action">Action</option>
+            <option value="Science Fiction">Science Fiction</option>
+            <option value="Economy">Economy</option>
+          </select>
+        </label>
 
-        <button>Add Book</button>
+        <button type="submit">Add Book</button>
       </form>
     </div>
   );

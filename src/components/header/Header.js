@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Header() {
   return (
@@ -10,7 +10,7 @@ function Header() {
         <li><Link to="/categories">CATEGORIES</Link></li>
       </ul>
     </div>
-  )
+  );
 }
 
-export default Header
+export default Header;
