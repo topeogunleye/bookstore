@@ -1,37 +1,26 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import Book from '../book/Book';
 import AddNewBook from '../form/AddNewBook';
 
 function Books() {
-  const books = [
-    {
-      title: 'The Hunger Games',
-      authur: 'Suzanne Collins',
-      category: 'Action',
-      completed: false,
-      id: 1,
-    },
-    {
-      title: 'Dune',
-      authur: 'Frank Herbert',
-      category: 'Science Fiction',
-      completed: false,
-      id: 2,
-    },
-    {
-      title: 'Capital in the Twenty First Century',
-      authur: 'Thomas Piketty',
-      category: 'Economy',
-      completed: false,
-      id: 3,
-    },
-  ];
+  // GET books from redux store
+  const books = useSelector((state) => state.booksReducer.books);
 
   return (
     <div>
       <h2>Books</h2>
       <ul>
-        <Book books={books} />
+        {books.map((book) => (
+          <Book
+            category={book.category}
+            completed={book.completed}
+            author={book.author}
+            id={book.id}
+            title={book.title}
+            key={book.id}
+          />
+        ))}
       </ul>
 
       <AddNewBook />
