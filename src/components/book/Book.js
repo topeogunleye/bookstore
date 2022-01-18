@@ -1,7 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { removeBook } from '../../redux/books/books';
 
 function Book({ books }) {
+  const dispatch = useDispatch();
+
+  const removeBookFromStore = (book) => {
+    // dispatch an action and pass it the newBook object (your action's payload)
+    dispatch(removeBook(book));
+  };
+
   return (
     <div>
       {books.map((book) => (
@@ -9,7 +18,9 @@ function Book({ books }) {
           <li key={book.id}>{book.title}</li>
           <li>{book.Authur}</li>
           <li>{book.completed ? 'Completed' : 'Not Completed'}</li>
-          <button type="button">Remove</button>
+          <button type="button" onClick={() => removeBookFromStore(book)}>
+            Remove
+          </button>
         </div>
       ))}
     </div>
