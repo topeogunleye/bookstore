@@ -31,7 +31,9 @@ function Books() {
     <div>
       <h2>Books</h2>
       <ul>
-        <Book books={books} />
+        {books.map((book) => (
+          <Book book={book} key={book.id} />
+        ))}
       </ul>
 
       <AddNewBook />
