@@ -5,7 +5,7 @@ import { addBook } from '../../redux/books/books';
 
 function AddNewBook() {
   const [title, setTitle] = useState('');
-  const [author, setAuthur] = useState('');
+  const [author, setAuthor] = useState('');
   const dispatch = useDispatch();
 
   const handleTitle = (e) => {
@@ -13,7 +13,7 @@ function AddNewBook() {
   };
 
   const handleAuthur = (e) => {
-    setAuthur(e.target.value);
+    setAuthor(e.target.value);
   };
 
   const submitBookToStore = () => {
