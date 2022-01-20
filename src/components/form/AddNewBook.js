@@ -24,6 +24,9 @@ function AddNewBook() {
     };
 
     dispatch(postBook(newBook));
+
+    setCategory('');
+    setTitle('');
   };
 
   return (
