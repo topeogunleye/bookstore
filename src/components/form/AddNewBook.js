@@ -16,7 +16,8 @@ function AddNewBook() {
     setCategory(e.target.value);
   };
 
-  const submitBookToStore = () => {
+  const submitBookToStore = (e) => {
+    e.preventDefault();
     const newBook = {
       item_id: uuidv4(),
       title,
@@ -44,13 +45,7 @@ function AddNewBook() {
         onChange={handleCategory}
       />
 
-      <button
-        type="submit"
-        onClick={(e) => {
-          e.preventDefault();
-          submitBookToStore();
-        }}
-      >
+      <button type="submit" onClick={submitBookToStore}>
         Add Book
       </button>
     </form>
