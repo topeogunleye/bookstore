@@ -1,18 +1,21 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchBooks } from '../../redux/books/books';
+import { fetchBooks, removeAllBooks } from '../../redux/books/books';
 import Book from '../book/Book';
 import AddNewBook from '../form/AddNewBook';
 
 function Books() {
   const dispatch = useDispatch();
 
-  // GET books from redux store
-  const books = useSelector((state) => state.booksReducer);
-
   useEffect(() => {
     dispatch(fetchBooks());
+    return () => {
+      dispatch(removeAllBooks())
+    };
   }, []);
+
+  // GET books from redux store
+  const books = useSelector((state) => state.booksReducer);
 
   return (
     <div>
