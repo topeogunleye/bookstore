@@ -1,30 +1,33 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch } from 'react-redux';
-import { addBook } from '../../redux/books/books';
+import { postBook } from '../../redux/books/books';
 
 function AddNewBook() {
   const [title, setTitle] = useState('');
-  const [author, setAuthor] = useState('');
+  const [category, setCategory] = useState('');
   const dispatch = useDispatch();
 
   const handleTitle = (e) => {
     setTitle(e.target.value);
   };
 
-  const handleAuthur = (e) => {
-    setAuthor(e.target.value);
+  const handleCategory = (e) => {
+    setCategory(e.target.value);
   };
 
-  const submitBookToStore = () => {
+  const submitBookToStore = (e) => {
+    e.preventDefault();
     const newBook = {
-      id: uuidv4(), // make sure it's unique
+      item_id: uuidv4(),
       title,
-      author,
+      category,
     };
 
-    // dispatch an action and pass it the newBook object (your action's payload)
-    dispatch(addBook(newBook));
+    dispatch(postBook(newBook));
+
+    setCategory('');
+    setTitle('');
   };
 
   return (
@@ -37,26 +40,12 @@ function AddNewBook() {
       />
       <input
         type="text"
-        placeholder="Authur"
-        value={author}
-        onChange={handleAuthur}
+        placeholder="Category"
+        value={category}
+        onChange={handleCategory}
       />
-      <label htmlFor="Category">
-        Category
-        <select name="Category" id="Category">
-          <option value="Action">Action</option>
-          <option value="Science Fiction">Science Fiction</option>
-          <option value="Economy">Economy</option>
-        </select>
-      </label>
 
-      <button
-        type="submit"
-        onClick={(e) => {
-          e.preventDefault();
-          submitBookToStore();
-        }}
-      >
+      <button type="submit" onClick={submitBookToStore}>
         Add Book
       </button>
     </form>

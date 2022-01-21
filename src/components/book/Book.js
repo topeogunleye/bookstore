@@ -1,32 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { removeBook } from '../../redux/books/books';
+import { deleteBook } from '../../redux/books/books';
 
-function Book({ author, title, id }) {
+function Book({ category, title, id }) {
   const dispatch = useDispatch();
 
   const removeBookFromStore = () => {
     // dispatch an action and pass it the newBook object (your action's payload)
-    dispatch(removeBook(id));
+    dispatch(deleteBook(id));
   };
 
   return (
-    <div>
-      <li>{title}</li>
-      <li>{author}</li>
+    <li>
+      <p>{title}</p>
+      <p>{category}</p>
       <button type="button" onClick={removeBookFromStore}>
         Remove
       </button>
-    </div>
+    </li>
   );
 }
 
 // book prop validation
 Book.propTypes = {
   title: PropTypes.string.isRequired,
-  author: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
+  category: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 // An object taking on a particular shape

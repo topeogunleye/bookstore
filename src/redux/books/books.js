@@ -1,32 +1,11 @@
+import axios from 'axios';
+
 // books.js
 const ADD_BOOK = 'bookStore/books/ADD_BOOK';
 const REMOVE_BOOK = 'bookStore/books/REMOVE_BOOK';
+const REMOVE_ALL_BOOKS = 'bookStore/books/REMOVE_ALL_BOOKS';
 
-const initialState = {
-  books: [
-    {
-      title: 'The Hunger Games',
-      author: 'Suzanne Collins',
-      category: 'Action',
-      completed: false,
-      id: 1,
-    },
-    {
-      title: 'Dune',
-      author: 'Frank Herbert',
-      category: 'Science Fiction',
-      completed: false,
-      id: 2,
-    },
-    {
-      title: 'Capital in the Twenty First Century',
-      author: 'Thomas Piketty',
-      category: 'Economy',
-      completed: false,
-      id: 3,
-    },
-  ],
-};
+const initialState = [];
 
 export const addBook = (payload) => ({
   type: ADD_BOOK,
@@ -35,17 +14,56 @@ export const addBook = (payload) => ({
 
 export const removeBook = (payload) => ({
   type: REMOVE_BOOK,
-  payload,
+  item_id: payload.id,
 });
+
+export const removeAllBooks = () => ({
+  type: REMOVE_ALL_BOOKS,
+});
+
+export const fetchBooks = () => (dispatch) => {
+  axios
+    .get(
+      'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/VPg2NHR7FOEaX70FWtik/books/',
+    )
+    .then((response) => {
+      const books = response.data;
+      Object.keys(books).forEach((itemId) => {
+        const [book] = books[itemId];
+        book.item_id = itemId;
+        dispatch(addBook(book));
+      });
+    })
+    .catch(() => {});
+};
+
+export const postBook = (newBook) => (dispatch) => {
+  axios
+    .post(
+      'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/VPg2NHR7FOEaX70FWtik/books/',
+      newBook,
+    )
+    .then(() => dispatch(addBook(newBook)))
+    .catch(() => {});
+};
+
+export const deleteBook = (id) => (dispatch) => {
+  axios
+    .delete(
+      `https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/VPg2NHR7FOEaX70FWtik/books/${id}`,
+    )
+    .then(() => dispatch(removeBook({ id })))
+    .catch(() => {});
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_BOOK:
-      return { books: [...state.books, action.payload] };
+      return [...state, action.payload];
     case REMOVE_BOOK:
-      return {
-        books: state.books.filter(({ id }) => id !== action.payload),
-      };
+      return state.filter((book) => book.item_id !== action.item_id);
+    case REMOVE_ALL_BOOKS:
+      return [];
     default:
       return state;
   }
