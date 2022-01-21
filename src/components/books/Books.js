@@ -10,7 +10,7 @@ function Books() {
   useEffect(() => {
     dispatch(fetchBooks());
     return () => {
-      dispatch(removeAllBooks())
+      dispatch(removeAllBooks());
     };
   }, []);
 

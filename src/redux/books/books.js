@@ -24,7 +24,7 @@ export const removeAllBooks = () => ({
 export const fetchBooks = () => (dispatch) => {
   axios
     .get(
-      'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/VPg2NHR7FOEaX70FWtik/books/'
+      'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/VPg2NHR7FOEaX70FWtik/books/',
     )
     .then((response) => {
       const books = response.data;
@@ -41,7 +41,7 @@ export const postBook = (newBook) => (dispatch) => {
   axios
     .post(
       'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/VPg2NHR7FOEaX70FWtik/books/',
-      newBook
+      newBook,
     )
     .then(() => dispatch(addBook(newBook)))
     .catch(() => {});
@@ -50,7 +50,7 @@ export const postBook = (newBook) => (dispatch) => {
 export const deleteBook = (id) => (dispatch) => {
   axios
     .delete(
-      `https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/VPg2NHR7FOEaX70FWtik/books/${id}`
+      `https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/VPg2NHR7FOEaX70FWtik/books/${id}`,
     )
     .then(() => dispatch(removeBook({ id })))
     .catch(() => {});
