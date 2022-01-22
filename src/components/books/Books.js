@@ -18,8 +18,8 @@ function Books() {
   const books = useSelector((state) => state.booksReducer);
 
   return (
-    <div className="grid place-items-center">
-      <ul className="py-8">
+    <div className="flex flex-col justify-center items-center bg-gray-200">
+      <ul className="py-8 w-screen m-auto">
         {books.map((book) => (
           <Book
             category={book.category}

@@ -12,10 +12,10 @@ function Book({ category, title, id }) {
   };
 
   return (
-    <li>
+    <li className="bg-white h-40 m-10 py-8 px-8">
       <p className="text-gray-500 font-bold text-sm">{title}</p>
       <p className="text-xl font-bold">{category}</p>
-      <div className="grid grid-cols-3 min-w-fit divide-x text-sm text-blue-400">
+      <div className="grid grid-cols-3 max-w-xs divide-x text-sm text-blue-400">
         <button type="button" className="pr-3">
           Comments
         </button>
