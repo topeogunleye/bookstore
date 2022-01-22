@@ -13,11 +13,19 @@ function Book({ category, title, id }) {
 
   return (
     <li>
-      <p>{title}</p>
-      <p>{category}</p>
-      <button type="button" onClick={removeBookFromStore}>
-        Remove
-      </button>
+      <p className="text-gray-500 font-bold text-sm">{title}</p>
+      <p className="text-xl font-bold">{category}</p>
+      <div className="grid grid-cols-3 min-w-fit divide-x text-sm text-blue-400">
+        <button type="button" className="pr-3">
+          Comments
+        </button>
+        <button type="button" onClick={removeBookFromStore} className="">
+          Remove
+        </button>
+        <button type="button" className="">
+          Edit
+        </button>
+      </div>
     </li>
   );
 }
