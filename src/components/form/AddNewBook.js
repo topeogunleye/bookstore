@@ -25,7 +25,6 @@ function AddNewBook() {
       title,
       category: 'Action',
     };
-    
     dispatch(postBook(newBook));
 
     setCategory('');
